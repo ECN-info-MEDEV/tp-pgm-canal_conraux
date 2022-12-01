@@ -8,15 +8,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Représentation d'une image au format pgm
  * @author conra
  */
 public class ImagePgm {
+    
+    //Attributs
+    
+    /**
+     * largeur de l'image
+     */
     private int width;
+    
+    /**
+     * hauteur de l'image
+     */
     private int height;
+    
+    /**
+     * niveau de gris maximum
+     */
     private int highestGreyLevel;
+    
+    /**
+     * représentation de l'image
+     */
     private List<List<Integer>> image;
     
+    //Méthodes
+    
+    /**
+     * crée une image pgm noire de taille w et h
+     * @param w
+     * @param h
+     */
     public ImagePgm(int w,int h) {
         width = w;
         height = h;
@@ -32,34 +57,66 @@ public class ImagePgm {
         }
     }
 
+    /**
+     * renvoie la largeur de l'image
+     * @return
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     * modifie la largeur de l'image
+     * @param width
+     */
     public void setWidth(int width) {
         this.width = width;
     }
 
+    /**
+     * renvoie la hauteur de l'image
+     * @return
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * modifie la hauteur de l'image
+     * @param height
+     */
     public void setHeight(int height) {
         this.height = height;
     }
 
+    /**
+     * renvoie le niveau de gris maximum de l'image (toujours 255)
+     * @return
+     */
     public int getHighestGreyLevel() {
         return highestGreyLevel;
     }
 
+    /**
+     * modifie le niveau de gris maximum de l'image (toujours 255)
+     * @param highestGreyLevel
+     */
     public void setHighestGreyLevel(int highestGreyLevel) {
         this.highestGreyLevel = highestGreyLevel;
     }
 
+    /**
+     * renvoie l'image en elle-même
+     * @return
+     */
     public List<List<Integer>> getImage() {
         return image;
     }
 
+    /**
+     * modifie l'image en elle-même
+     * @param image
+     */
     public void setImage(List<List<Integer>> image) {
         this.image = image;
     }
