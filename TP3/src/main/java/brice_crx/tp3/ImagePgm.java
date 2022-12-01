@@ -4,6 +4,8 @@
  */
 package brice_crx.tp3;
 
+import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +54,44 @@ public class ImagePgm {
             list = new ArrayList();
             for (int j=0;j<width;j++) {
                 list.add(0);
+            }
+            image.add(list);
+        }
+    }
+    
+    /**
+     * crée une image pgm noire à partir des données contenu dans le fichier pgm
+     * @param url
+     * @throws java.io.FileNotFoundException
+     */
+    
+    
+    public ImagePgm(String url) throws FileNotFoundException, IOException {
+        highestGreyLevel = 255;
+        image = new ArrayList();
+        
+        //String url = "/home/thomas/Documents/GitHub/tp-pgm-canal_conraux/TP3/images/baboon.pgm";
+        url = System.getProperty("user.dir") + "/images/" + url;
+        
+        // Lecture du fichier pgm
+        FileReader file = new FileReader(url);
+        
+        
+        int k;
+        
+        k = file.read();
+        k = file.read();
+        
+        width = file.read();        
+        height = file.read();
+        
+        k = file.read();
+        
+        List<Integer> list;
+        for (int i = 0;i<height;i++) {
+            list = new ArrayList();
+            for (int j=0;j<width;j++) {
+                list.add(file.read());
             }
             image.add(list);
         }
