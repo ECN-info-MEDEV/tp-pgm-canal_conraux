@@ -60,7 +60,7 @@ public class ImagePgm {
     }
     
     /**
-     * crée une image pgm noire à partir des données contenu dans le fichier pgm
+     * crée une image pgm à partir des données contenu dans le fichier pgm
      * @param url
      * @throws java.io.FileNotFoundException
      */
@@ -159,6 +159,62 @@ public class ImagePgm {
      */
     public void setImage(List<List<Integer>> image) {
         this.image = image;
+    }
+    
+    //Fonctions de seuillage...
+
+    /**
+     * Modifie l'image en rendant noirs les pixels dont la valeur est strictement inférieure à la valeur seuil et blancs les autres
+     * @param seuilValue
+     */
+    
+    public void seuil(int seuilValue) {
+        for (List<Integer> line : image) {
+            for (Integer value : line) {
+                if (value < seuilValue) {
+                    value = 0;
+                }
+                else {
+                    value = 255;
+                }
+            }
+        }
+    }
+    
+    /**
+     * Réalise la différence entre deux images de même dimension
+     * @param img
+     */
+    public void difference(ImagePgm img) {
+        if (width == img.width && height == img.height) {
+            List<List<Integer>> newImg = new ArrayList();
+            for (int i = 0; i<height;i++) {
+                List<Integer> ligne = new ArrayList();
+                for (int j = 0; j < width; j++) {
+                    int value = image.get(i).get(j) - img.image.get(i).get(j);
+                    if (value < 0) {
+                        ligne.add(0);
+                    }
+                    else {
+                        ligne.add(value);
+                    }
+                }
+                newImg.add(ligne);
+            }
+            image = newImg;
+        }
+        else {
+            System.out.println("Les tailles des images ne correspondent pas.");
+        }
+    }
+    
+    /**
+     * Permet de redimensionner une image à la taille w et h
+     * @param w
+     * @param h
+     */
+    public void redimension(int w, int h) {
+        
     }
     
     
