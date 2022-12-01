@@ -12,5 +12,5 @@ public class ImagePgm {
     private int width;
     private int height;
     private int highestGreyLevel;
-    private int[] i;
+    private int[][] image;
 }
