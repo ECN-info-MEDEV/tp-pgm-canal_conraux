@@ -257,12 +257,12 @@ public class ImagePgm {
      * @param seuilValue
      */
     public void seuil(int seuilValue) {
-        for (List<Integer> line : image) {
-            for (Integer value : line) {
-                if (value < seuilValue) {
-                    value = 0;
+        for (int i = 0; i < this.height; i++) {
+            for (int j = 0; j < this.width; j++) {
+                if (this.image.get(i).get(j) < seuilValue) {
+                    this.image.get(i).set(j, 0);
                 } else {
-                    value = 255;
+                    this.image.get(i).set(j, 255);
                 }
             }
         }
