@@ -153,16 +153,22 @@ public class NewApplication extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 12)); // NOI18N
         jLabel1.setText("Entrer le nom de l'image à importer et cliquer sur le bouton");
 
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 2, 12)); // NOI18N
         jLabel2.setText("Entrer le nom de sauvegarde de l'image et cliquer sur le bouton");
 
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 2, 12)); // NOI18N
         jLabel3.setText("Entrer la valeur du seuil souhaitée et cliquer sur le bouton");
 
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 2, 12)); // NOI18N
         jLabel4.setText("Entrer le nom de l'image a soustraire puis cliquer");
 
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 2, 12)); // NOI18N
         jLabel5.setText("Entrer le facteur d'agrandissement souhaité puis cliquer");
 
+        jLabel6.setFont(new java.awt.Font("Times New Roman", 2, 12)); // NOI18N
         jLabel6.setText("Entrer le facteur de rétrecissement souhaité puis cliquer");
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
@@ -297,7 +303,7 @@ public class NewApplication extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton2)
                             .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
