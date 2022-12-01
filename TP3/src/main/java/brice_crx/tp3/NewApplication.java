@@ -4,6 +4,10 @@
  */
 package brice_crx.tp3;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author conra
@@ -18,6 +22,13 @@ public class NewApplication extends javax.swing.JFrame {
     }
     
     public ImagePgm currentIm;
+    public ImagePgm differenceIm;
+    public int seuilvalue;
+    public int differencevalue;
+    public int agrandissementvalue;
+    public int diviseurvalue;
+    public String importName;
+    public String saveName;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -269,65 +280,86 @@ public class NewApplication extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        //Import image
+        try {
+            // TODO add your handling code here:
+            //Import image
+            currentIm = new ImagePgm(importName);
+        } catch (IOException ex) {
+            Logger.getLogger(NewApplication.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.out.println("Button 1 tapped");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         //Seuil
+        currentIm.seuil(seuilvalue);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         //Difference
+        currentIm.difference(differenceIm);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         //Agrandissement
+        currentIm.agrandissement(agrandissementvalue);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         //Retrecissement
+        currentIm.retrecissement(diviseurvalue);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
         //Seuil
-        
+        seuilvalue = Integer.parseInt(jTextField1.getText());
+        System.out.println(seuilvalue);
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         //Save image
+        //Wait for Thomas's push
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
         //Difference
+        differencevalue = Integer.parseInt(jTextField2.getText());
+        System.out.println(differencevalue);
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
         //Agrandissement
+        agrandissementvalue = Integer.parseInt(jTextField3.getText());
+        System.out.println(agrandissementvalue);
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
         //retrecissement
+        diviseurvalue = Integer.parseInt(jTextField4.getText());
+        System.out.println(diviseurvalue);
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
         // TODO add your handling code here:
         //Import image
+        importName = jTextField5.getText();
+        System.out.println(importName);
     }//GEN-LAST:event_jTextField5ActionPerformed
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
         // TODO add your handling code here:
         //Saveimage
+        saveName = jTextField6.getText();
+        System.out.println(saveName);
     }//GEN-LAST:event_jTextField6ActionPerformed
 
     /**
