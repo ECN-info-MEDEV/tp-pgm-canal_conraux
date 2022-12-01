@@ -61,39 +61,64 @@ public class ImagePgm {
     }
 
     /**
-     * crée une image pgm à partir des données contenu dans le fichier pgm
+     * crée une image pgm noire à partir des données contenu dans le fichier pgm
      *
-     * @param url
-     * @throws java.io.FileNotFoundException
+     * @param path
      */
-    public ImagePgm(String url) throws FileNotFoundException, IOException {
-        highestGreyLevel = 255;
-        image = new ArrayList();
-
-        //String url = "/home/thomas/Documents/GitHub/tp-pgm-canal_conraux/TP3/images/baboon.pgm";
-        url = System.getProperty("user.dir") + "/images/" + url;
+    public ImagePgm(String path) {
+        // Recupère le chemin du fichier
+        path = System.getProperty("user.dir") + "/images/" + path;
+        path = setPgmExtension(path);
 
         // Lecture du fichier pgm
-        FileReader file = new FileReader(url);
+        File file = new File(path);
+        String line;
+        String[] lineSplitted = null;
+        try (Scanner myReader = new Scanner(file)) {
+            // Traitement de l'entête
+            myReader.nextLine();
+            myReader.nextLine();
 
-        int k;
+            lineSplitted = myReader.nextLine().split("\\s+");
+            this.width = Integer.parseInt(lineSplitted[0]);
+            this.height = Integer.parseInt(lineSplitted[1]);
+            lineSplitted = myReader.nextLine().split("\\s+");
+            this.highestGreyLevel = Integer.parseInt(lineSplitted[0]);
+            ////////////////////////
 
-        k = file.read();
-        k = file.read();
+            // Traitement des valeurs des pixels
+            line = "";
 
-        width = file.read();
-        height = file.read();
+            while (myReader.hasNextLine()) {
+                line += myReader.nextLine() + " ";
+                if (line.charAt(0) == ' ') {
+                    line = line.substring(1, line.length());
+                }
+            }
 
-        k = file.read();
+            lineSplitted = line.split("\\s+");
+            ////////////////////////////////////////////////////////
+        
+        }catch (IOException e){
+            System.out.println("Le chemin du fichier ne mène à rien");
+        }
+        
+
+        // Recupération des pixels dans le tableau
+        int k = 0;
+
+        this.image = new ArrayList();
 
         List<Integer> list;
         for (int i = 0; i < height; i++) {
             list = new ArrayList();
             for (int j = 0; j < width; j++) {
-                list.add(file.read());
+                list.add(Integer.parseInt(lineSplitted[k]));
+                k++;
             }
             image.add(list);
         }
+        ////////////////////////////
     }
 
     /**
@@ -159,70 +184,71 @@ public class ImagePgm {
         return image;
     }
 
-    
+   
     /**
      * Crée une nouvelle image pgm à partir de l'objet courant
-     * @param nom 
+     *
+     * @param nom
      */
-    public void WritePgmImage(String nom){
-        
-        String path = System.getProperty("user.dir") + "/images/" + nom + ".pgm";
+    public void WritePgmImage(String nom) {
+
+        // Définition du chemin
+        String path = System.getProperty("user.dir") + "/images/" + nom;
+        path = setPgmExtension(path);
+
         // Création du fichier pgm
         try {
             File newImage = new File(path);
-        if (newImage.createNewFile()) {
-            System.out.println("File created: " + newImage.getName());
-        }   else {
-            System.out.println("File already exists.");
+            if (newImage.createNewFile()) {
+                System.out.println("Fichier créé : " + newImage.getName());
+            } else {
+                System.out.println("Le fichier existe déjà, on écrit par dessus.");
+            }
+        } catch (IOException e) {
+            System.out.println("Une erreur a eut lieu lors de la création du fichier");
         }
-        }   catch (IOException e) {
-            System.out.println("An error occurred.");
-        }
-        
+
         // Symbole de retour a la ligne selon l'os
         String retourAlaLigne;
-        if(System.getProperty("os.name").equals("Linux")){
+        if (System.getProperty("os.name").equals("Linux")) {
             retourAlaLigne = "\n";
-        }
-        else{
+        } else {
             retourAlaLigne = "\r\n";
         }
-        
+
         // Ecriture dans le fichier
         try {
+            // Ecriture entête
             FileWriter imageWriter = new FileWriter(path);
-            imageWriter.write("P2"+retourAlaLigne);
-            imageWriter.write("#"+retourAlaLigne);
+            imageWriter.write("P2" + retourAlaLigne);
+            imageWriter.write("#" + retourAlaLigne);
             imageWriter.write(this.width + "  " + this.height + retourAlaLigne);
-            imageWriter.write("255"+retourAlaLigne);
-            
+            imageWriter.write("255" + retourAlaLigne);
+
+            // Ecriture pixels
             String line = "";
-            int i,j;
-            
-            
-            System.out.println("Taille de la matrice : " + this.width*this.height);
-            
-            for(int k = 0; k<this.width*this.height;k++){
-                i = k/this.width;
-                j = k%this.width;
-                
-                if(line.length()>55){   // On rentre la ligne dans le fichier
-                    line+=retourAlaLigne;
+            int i, j;
+
+            for (int k = 0; k < this.width * this.height; k++) {
+                i = k / this.width;
+                j = k % this.width;
+
+                if (line.length() > 45) {   // On rentre la ligne dans le fichier avant quelle ne soit trop longue
+                    line += retourAlaLigne;
                     imageWriter.write(line);
                     line = "";
                 }
-                else{   // On ajoute le prochain pixel à la ligne
-                    line+= Integer.toString(this.getImage().get(i).get(j)) + "  ";
-                }
+                // On ajoute le prochain pixel à la ligne
+                line += Integer.toString(this.getImage().get(i).get(j)) + "  ";
+
             }
-            
             imageWriter.close();
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            System.out.println("Une erreur a eu lieu lors de l'écriture dans le fichier");
         }
     }
-    
 
+    
     //Fonctions de seuillage...
     /**
      * Modifie l'image en rendant noirs les pixels dont la valeur est
@@ -319,4 +345,23 @@ public class ImagePgm {
         image = newImg;
     }
 
+    /**
+     * Fonction statique qui vérifie que l'extension est bien .pgm
+     *
+     * @param url
+     * @return
+     */
+    static String setPgmExtension(String url) {
+        String troisDerniersChars = url.substring(url.length() - 3, url.length());
+
+        if (!troisDerniersChars.equalsIgnoreCase("pgm")) {
+            int indexPoint = url.indexOf(".");
+            if (indexPoint != -1) {
+                url = url.substring(0, indexPoint);
+            }
+            url += ".pgm";
+        }
+
+        return url;
+    }
 }
