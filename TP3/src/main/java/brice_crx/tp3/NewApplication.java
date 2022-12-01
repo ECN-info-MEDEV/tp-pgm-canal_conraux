@@ -21,13 +21,44 @@ public class NewApplication extends javax.swing.JFrame {
         initComponents();
     }
     
+    /**
+     * Image qui est modifiée quand on opère
+     */
     public ImagePgm currentIm;
+
+    /**
+     * Image qui sera soustraite à la première image
+     */
     public ImagePgm differenceIm;
+
+    /**
+     * Valeur seuil avec laquelle on appliquera la fonction seuil sur l'image courante
+     */
     public int seuilvalue;
+
+    /**
+     * Valeur d'agrandissement avec laquelle on appliquera la fonction agrandissement sur l'image courante
+     */
     public int agrandissementvalue;
+
+    /**
+     * Valeur de rétrecissement avec laquelle on appliquera la fonction retrecissement sur l'image courante
+     */
     public int diviseurvalue;
+
+    /**
+     * Nom associé à l'image que l'on importera
+     */
     public String importName;
+
+    /**
+     * Nom sous lequel l'image courante sera sauvegardée
+     */
     public String saveName;
+
+    /**
+     * Nom qui servira à récupérer l'image à soustraire
+     */
     public String differenceName;
 
     /**
