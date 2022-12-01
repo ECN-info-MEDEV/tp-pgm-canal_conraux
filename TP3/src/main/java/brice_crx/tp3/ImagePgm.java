@@ -240,5 +240,27 @@ public class ImagePgm {
         height *= multiplicateur;
         image = newImg;
     }
+    
+    /**
+     *  Retrecit l'image d'un diviseur diviseur
+     * @param diviseur
+     */
+    public void retrecissement(int diviseur) {
+        List<List<Integer>> newImg = new ArrayList();
+        
+        //Création de la nouvelle image
+        for (int i = 0; i<height; i+= diviseur) {
+            List<Integer> row = new ArrayList();
+            for (int j=0; j< width; j+=diviseur) {
+                row.add(image.get(i).get(j));
+            }
+            newImg.add(row);
+        }
+        
+        //Modification de l'image avec les bonnes valeurs
+        height = (int)(height/diviseur);
+        width = (int)(width/diviseur);
+        image = newImg;
+    }
 
 }
