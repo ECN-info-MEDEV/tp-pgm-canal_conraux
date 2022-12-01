@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Représentation d'une image au format pgm
@@ -158,14 +159,69 @@ public class ImagePgm {
         return image;
     }
 
+    
     /**
-     * modifie l'image en elle-même
-     *
-     * @param image
+     * Crée une nouvelle image pgm à partir de l'objet courant
+     * @param nom 
      */
-    public void setImage(List<List<Integer>> image) {
-        this.image = image;
+    public void WritePgmImage(String nom){
+        
+        String path = System.getProperty("user.dir") + "/images/" + nom + ".pgm";
+        // Création du fichier pgm
+        try {
+            File newImage = new File(path);
+        if (newImage.createNewFile()) {
+            System.out.println("File created: " + newImage.getName());
+        }   else {
+            System.out.println("File already exists.");
+        }
+        }   catch (IOException e) {
+            System.out.println("An error occurred.");
+        }
+        
+        // Symbole de retour a la ligne selon l'os
+        String retourAlaLigne;
+        if(System.getProperty("os.name").equals("Linux")){
+            retourAlaLigne = "\n";
+        }
+        else{
+            retourAlaLigne = "\r\n";
+        }
+        
+        // Ecriture dans le fichier
+        try {
+            FileWriter imageWriter = new FileWriter(path);
+            imageWriter.write("P2"+retourAlaLigne);
+            imageWriter.write("#"+retourAlaLigne);
+            imageWriter.write(this.width + "  " + this.height + retourAlaLigne);
+            imageWriter.write("255"+retourAlaLigne);
+            
+            String line = "";
+            int i,j;
+            
+            
+            System.out.println("Taille de la matrice : " + this.width*this.height);
+            
+            for(int k = 0; k<this.width*this.height;k++){
+                i = k/this.width;
+                j = k%this.width;
+                
+                if(line.length()>55){   // On rentre la ligne dans le fichier
+                    line+=retourAlaLigne;
+                    imageWriter.write(line);
+                    line = "";
+                }
+                else{   // On ajoute le prochain pixel à la ligne
+                    line+= Integer.toString(this.getImage().get(i).get(j)) + "  ";
+                }
+            }
+            
+            imageWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+        }
     }
+    
 
     //Fonctions de seuillage...
     /**
