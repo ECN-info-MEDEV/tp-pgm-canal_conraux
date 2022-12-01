@@ -367,38 +367,38 @@ public class NewApplication extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            // TODO add your handling code here:
-            //Import image
-            currentIm = new ImagePgm(importName);
-        } catch (IOException ex) {
-            Logger.getLogger(NewApplication.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("Button 1 tapped");
+        // TODO add your handling code here:
+        //Import image
+        currentIm = new ImagePgm(importName);
+        System.out.println("Image imported");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         //Seuil
         currentIm.seuil(seuilvalue);
+        System.out.println("Seuil operation done");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         //Difference
         currentIm.difference(differenceIm);
+        System.out.println("Difference operation done");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         //Agrandissement
         currentIm.agrandissement(agrandissementvalue);
+        System.out.println("Agrandissement operation done");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         //Retrecissement
         currentIm.retrecissement(diviseurvalue);
+        System.out.println("Retrecissement operation done");
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -412,6 +412,7 @@ public class NewApplication extends javax.swing.JFrame {
         // TODO add your handling code here:
         //Save image
         currentIm.WritePgmImage(saveName);
+        System.out.println("Save done");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -419,11 +420,7 @@ public class NewApplication extends javax.swing.JFrame {
         //Difference
         differenceName = jTextField2.getText();
         System.out.println(differenceName);
-        try {
-            differenceIm = new ImagePgm(differenceName);
-        } catch (IOException ex) {
-            Logger.getLogger(NewApplication.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        differenceIm = new ImagePgm(differenceName);
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
